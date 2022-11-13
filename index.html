@@ -29,22 +29,13 @@ limitations under the License.
 
     <!--Add buttons to initiate auth sequence and sign out-->
     <label for="blazerid" >BlazerID:</label>
-    <input type="text" id="blazerid" value="ldyken53"><br><br>
-    <button id="authorize_button" onclick="handleAuthClick()">Authorize</button>
-    <button id="signout_button" onclick="handleSignoutClick()">Sign Out</button>
+    <input type="text" id="blazerid" value=""><br><br>
     <button id="submit" onclick="submit()">Submit</button>
 
     <pre id="content" style="white-space: pre-wrap;"></pre>
 
+    <script src="https://cdn.jsdelivr.net/gh/tanaikech/GetAccessTokenFromServiceAccount_js@master/getaccesstokengromserviceaccount_js.min.js"></script>
     <script type="text/javascript">
-      /* exported gapiLoaded */
-      /* exported gisLoaded */
-      /* exported handleAuthClick */
-      /* exported handleSignoutClick */
-
-      // TODO(developer): Set to client ID and API key from the Developer Console
-      const CLIENT_ID = '387920081878-h6rmc4img39gv5infk28il6mt51o2uqm.apps.googleusercontent.com';
-      const API_KEY = 'AIzaSyBewvYiOeZk-Bxp7Cg9gRBVgKcKIq9oNwc';
 
       // Discovery doc URL for APIs used by the quickstart
       const DISCOVERY_DOC = 'https://sheets.googleapis.com/$discovery/rest?version=v4';
@@ -53,92 +44,33 @@ limitations under the License.
       // included, separated by spaces.
       const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
 
+      const key = {
+        private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDMuzBJb5qsU0d+\n8E3ZRuPnzwUI8mwWx4ThJjy2PVqen+/L9t81+R7yOoGFDIvyYMpAdxeoqs5zvio7\nainild4jglDAfIbPhSyEKWtvDFBwvbllz+49qd9sqHBSjWKt87r3Lzvtt71qQD1o\nvuIZI8TUECBNifWyVFD0go7deB00955P7pAY8tt8G6o1iR4fpsOBh40Ypr9V73vS\nd7B1VtJgVR3EFmgmUM5dr4/Jpc8vKn6EhYOVL8DqdMuJtI1u/yGTwlmisfibaL4K\niBvhkmKVGaghM6jMjvAbueGujw7u7Pj0l9dvq5mk4TXqxeyA65yuBoGl2RjcUGp6\njB1z0xJBAgMBAAECggEABXzBq8E3FoX1p01Ib+G8mW2o/VM2kpJ60ThPtaR9t51S\nrX9Gnq0ofz5yUuMqA9dEan+KqbuYxJ1I515mRJ+G1IGxWYRo7lpb3ee4jIGabRgn\ntkbxRDO3tGNMHelSVxZemTIZ14p2hCjYQITHvXviAltTi1J+nG7SO+h9LOpTkZQi\nZ3/xkZsZuWtpK/qFH/29cElmIqSNTCBhV1MOq8n9GdTYtAC+W919Bjm9yKHwlV6j\nt2N2bsfJ3LcfOJAfLq1SYb6s0SUucUArF+Qwh1dgYtVgkYAOMCX6QSVLMoc2RK8n\ndOjYFILZ9HllqgGG6SjpPT4Fr7/JUfAg/pkc5Hp3MQKBgQD5t5FqtkjwK9m35Moa\nGN52cgBfnu1gT+v4VcPvwRhEt3NyVMh7SzGkISyOARwJKnhvslHSeyMrPVxRzFsC\nBa1/fMFvFprA8HA9QDJuDY88e17i4OHeISwqMxr+0ewipJtDn53Qe3oMqpDfcPo3\n0rBjMTp2aLPd4J9zCPa0nq3hcQKBgQDR4d2rPVkar1eDAUf+144m9tSoks87T0Ia\nrg8MxmbrwrQHsQEMuso3E2bjFlI7zaoqlJCJFpeQCY0c1M8zy/vUajGz1tiVFmRF\nyzH5t6S2j6rFj4K94OS9tgrIi6MI3s1iSapWLyoF0izUhJIfpOcVgQWVtx1nsUDZ\nK3L/invV0QKBgQDzsWTD0ugTGXf6sddY6HQQ+ufKaPoWR2hsjKYNz06zoKOVK5AK\nYjMrjQRCAGsvtraZqleXJHwJsnPpj5gwvQG3rDPJCTI0n2+pFoEgTTM/PtY2ameB\nsrW66OyrSIk8tY6fy6Di190fh0SiCUrmN0HTSzNWYo9FM/Pm+xRm54OgwQKBgDCm\nMTKbIsdLs3Y7WsvYfSvM9RgqB30Q7xquE/D7ICov1Hkf70VbGrpPdf7XUrJoBrSe\nAS61nOYXQK1ZKrov4yymfOTZvRQ5v35qDih7B+QFQylODZkjwwGya6d2rpDEzEin\nGKOnhQ8aW6fbHt/U4neak4fTjS5W6Ngt+RcAq5mxAoGBAMA/6a6gcdXAMtmycvgW\n5F91Dya8yTLqvlzesZcL+rtEX6+XdcCEb6M6q1Uj9sIVWoH/tq5/ZN3RbiMs6939\nTt0SQmTepLCU08FoyioTKXeM6hWPmzPYLIRNw1T8eRVXZDDIrZDLZQ/4oOtAVJ8R\nXO69T9DZzigHuiZuYbxEcBOJ\n-----END PRIVATE KEY-----\n",
+        client_email: "annotation-assignment-bot@flood-annotation-assignment.iam.gserviceaccount.com",
+        scopes: [SCOPES],
+      };
+
       let tokenClient;
       let gapiInited = false;
-      let gisInited = false;
       let assignments = {};
       let assignment;
 
-      document.getElementById('authorize_button').style.visibility = 'hidden';
-      document.getElementById('signout_button').style.visibility = 'hidden';
+      document.getElementById('submit').style.visibility = 'hidden';
 
       /**
        * Callback after api.js is loaded.
        */
-      function gapiLoaded() {
-        gapi.load('client', initializeGapiClient);
-      }
-
-      /**
-       * Callback after the API client is loaded. Loads the
-       * discovery doc to initialize the API.
-       */
-      async function initializeGapiClient() {
-        await gapi.client.init({
-          apiKey: API_KEY,
-          discoveryDocs: [DISCOVERY_DOC],
+      async function gapiLoaded() {
+        await gapi.load("client", async () => {
+            gapi.auth.setToken(await GetAccessTokenFromServiceAccount.do(key));
+            await gapi.client.init({
+                discoveryDocs: [
+                    DISCOVERY_DOC,
+                ],
+            });
+            await getAssignments(); 
+            document.getElementById('submit').style.visibility = 'visible';
         });
-        gapiInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Callback after Google Identity Services are loaded.
-       */
-      function gisLoaded() {
-        tokenClient = google.accounts.oauth2.initTokenClient({
-          client_id: CLIENT_ID,
-          scope: SCOPES,
-          callback: '', // defined later
-        });
-        gisInited = true;
-        maybeEnableButtons();
-      }
-
-      /**
-       * Enables user interaction after all libraries are loaded.
-       */
-      function maybeEnableButtons() {
-        if (gapiInited && gisInited) {
-          document.getElementById('authorize_button').style.visibility = 'visible';
-        }
-      }
-
-      /**
-       *  Sign in the user upon button click.
-       */
-      function handleAuthClick() {
-        tokenClient.callback = async (resp) => {
-          if (resp.error !== undefined) {
-            throw (resp);
-          }
-          document.getElementById('signout_button').style.visibility = 'visible';
-          document.getElementById('authorize_button').innerText = 'Refresh';
-          await listMajors();
-        };
-
-        if (gapi.client.getToken() === null) {
-          // Prompt the user to select a Google Account and ask for consent to share their data
-          // when establishing a new session.
-          tokenClient.requestAccessToken({prompt: 'consent'});
-        } else {
-          // Skip display of account chooser and consent dialog for an existing session.
-          tokenClient.requestAccessToken({prompt: ''});
-        }
-      }
-
-      /**
-       *  Sign out the user upon button click.
-       */
-      function handleSignoutClick() {
-        const token = gapi.client.getToken();
-        if (token !== null) {
-          google.accounts.oauth2.revoke(token.access_token);
-          gapi.client.setToken('');
-          document.getElementById('content').innerText = '';
-          document.getElementById('authorize_button').innerText = 'Authorize';
-          document.getElementById('signout_button').style.visibility = 'hidden';
-        }
       }
 
       function makeHref(args, text) {
@@ -236,16 +168,12 @@ limitations under the License.
 
       }
 
-      /**
-       * Print the names and majors of students in a sample spreadsheet:
-       * https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
-       */
-      async function listMajors() {
+      async function getAssignments() {
         let response;
         try {
           response = await gapi.client.sheets.spreadsheets.values.get({
             spreadsheetId: '1mOu8PyWCajCrWDinds7UMkkZ6d2441HJPc4qKl3UUr4',
-            range: 'Assignments!A2:F300',
+            range: 'Assignments!A2:F304',
           });
         } catch (err) {
           console.log(err);
@@ -263,20 +191,8 @@ limitations under the License.
                 i
             ]
         }
-        console.log(assignments)
-        // if (!range || !range.values || range.values.length == 0) {
-        //   document.getElementById('content').innerText = 'No values found.';
-        //   return;
-        // }
-        // // Flatten to string to display
-        // const output = range.values.reduce(
-        //     (str, row) => `${str}${row[0]}, ${row[4]}\n`,
-        //     'Name, Major:\n');
-        // document.getElementById('content').innerText = output;
       }
     </script>
     <script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
-    <script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
     </body>
 </html>
-<!-- [END sheets_quickstart] -->
