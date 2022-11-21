@@ -106,16 +106,16 @@ limitations under the License.
             }
             var counter = parseInt(response.result.values[0][1]);
             if (response.result.values[0][0] == 0) {
-                try {
-                    response = await gapi.client.sheets.spreadsheets.values.update({
-                        spreadsheetId: '1mOu8PyWCajCrWDinds7UMkkZ6d2441HJPc4qKl3UUr4',
-                        range: 'Counters!A2',
-                        valueInputOption: 'RAW'
-                    }, {values: [[1]]});
-                } catch (err) {
-                    console.log(err);
-                    return;
-                }
+                // try {
+                //     response = await gapi.client.sheets.spreadsheets.values.update({
+                //         spreadsheetId: '1mOu8PyWCajCrWDinds7UMkkZ6d2441HJPc4qKl3UUr4',
+                //         range: 'Counters!A2',
+                //         valueInputOption: 'RAW'
+                //     }, {values: [[1]]});
+                // } catch (err) {
+                //     console.log(err);
+                //     return;
+                // }
                 try {
                     response = await gapi.client.sheets.spreadsheets.values.update({
                         spreadsheetId: '1mOu8PyWCajCrWDinds7UMkkZ6d2441HJPc4qKl3UUr4',
@@ -146,16 +146,16 @@ limitations under the License.
                     console.log(err);
                     return;
                 }
-                try {
-                    response = await gapi.client.sheets.spreadsheets.values.update({
-                        spreadsheetId: '1mOu8PyWCajCrWDinds7UMkkZ6d2441HJPc4qKl3UUr4',
-                        range: 'Counters!A2',
-                        valueInputOption: 'RAW'
-                    }, {values: [[0]]});
-                } catch (err) {
-                    console.log(err);
-                    return;
-                }
+                // try {
+                //     response = await gapi.client.sheets.spreadsheets.values.update({
+                //         spreadsheetId: '1mOu8PyWCajCrWDinds7UMkkZ6d2441HJPc4qKl3UUr4',
+                //         range: 'Counters!A2',
+                //         valueInputOption: 'RAW'
+                //     }, {values: [[0]]});
+                // } catch (err) {
+                //     console.log(err);
+                //     return;
+                // }
                 document.getElementById('content').innerHTML = makeHref(assignment[0][0], "First") + 
                     "<br/>" + makeHref(assignment[0][1], "Second") + "<br/>" + makeHref(assignment[0][2], "Third") +
                     "<br/>" + makeHref(assignment[0][3], "Fourth") + "<br/>" + makeHref(assignment[0][4], "Fifth");
